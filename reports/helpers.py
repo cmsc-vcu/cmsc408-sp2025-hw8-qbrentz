@@ -101,6 +101,7 @@ def create_database_engine(uri):
 def create_db_wrapper( config_map ):
 
     # load and store credentials
+    newLine = "\n"
     load_dotenv()
     config = {}
     for key in config_map.keys():
@@ -119,7 +120,7 @@ def create_db_wrapper( config_map ):
         errors.append("Fix the .env file and rerun quarto ...")
         # Convert errors to a DataFrame
         error_df = pd.DataFrame({'Errors loading .env file': errors})
-        print(f"{'\n'.join(errors)}")
+        print(f"{newLine.join(errors)}")
     else:
     # build a sqlalchemy engine string
         engine_uri = f"mysql+pymysql://{config['user']}:{config['password']}@{config['host']}/{config['database']}"
