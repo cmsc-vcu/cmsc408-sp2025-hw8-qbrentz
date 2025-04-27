@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="John Leonard">
-<meta name="dcterms.date" content="2025-04-20">
+<meta name="dcterms.date" content="2025-04-27">
 
 <title>Loader script for Homework 8</title>
 <style>
@@ -3132,7 +3132,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 20, 2025</p>
+      <p class="date">April 27, 2025</p>
     </div>
   </div>
   
@@ -3150,7 +3150,7 @@ vertical-align: -.125em;
 <p>We’ll be using data downloaded from the World Bank data catalog of <a href="https://datatopics.worldbank.org/world-development-indicators/">world development Indicators</a>. Specifically, we’ll be using the CSV files stored within this <a href="https://databank.worldbank.org/data/download/WDI_CSV.zip">ZIP file</a>.</p>
 <section id="download-and-extract-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="download-and-extract-the-data">Download and extract the data</h2>
-<div id="c0c3b1a2" class="cell" data-execution_count="1">
+<div id="73aeb6ce" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> zipfile</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> io</span>
@@ -3187,7 +3187,7 @@ vertical-align: -.125em;
 </section>
 <section id="load-csv-files-into-pandas-dataframe" class="level2">
 <h2 class="anchored" data-anchor-id="load-csv-files-into-pandas-dataframe">Load CSV files into Pandas dataframe</h2>
-<div id="792fbc23" class="cell" data-execution_count="2">
+<div id="8cd43848" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the CSV file into a Pandas DataFrame</span></span>
@@ -3204,11 +3204,12 @@ vertical-align: -.125em;
 </section>
 <section id="test-connection-by-reading-tables-in-db" class="level2">
 <h2 class="anchored" data-anchor-id="test-connection-by-reading-tables-in-db">Test connection by reading tables in DB</h2>
-<div id="18ab7ee3" class="cell" data-execution_count="5">
+<div id="c677d49a" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-stdout">
-<pre><code>Empty DataFrame
-Columns: [Tables_in_world_bank]
-Index: []</code></pre>
+<pre><code>  Tables_in_world_bank
+0          wdi_country
+1             wdi_data
+2           wdi_series</code></pre>
 </div>
 </div>
 </section>
@@ -3216,7 +3217,7 @@ Index: []</code></pre>
 <h2 class="anchored" data-anchor-id="store-dataframes-into-mysql-db">Store dataframes into mySQL DB</h2>
 <section id="storing-wdi-country" class="level3">
 <h3 class="anchored" data-anchor-id="storing-wdi-country">Storing WDI Country</h3>
-<div id="22092f41" class="cell" data-execution_count="6">
+<div id="6af53e63" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_country.to_sql(<span class="st">&quot;wdi_country&quot;</span>, cnx, if_exists<span class="op">=</span><span class="st">&quot;replace&quot;</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>265</code></pre>
@@ -3225,7 +3226,7 @@ Index: []</code></pre>
 </section>
 <section id="storing-wdi-series" class="level3">
 <h3 class="anchored" data-anchor-id="storing-wdi-series">Storing WDI Series</h3>
-<div id="12796301" class="cell" data-execution_count="7">
+<div id="a5a1c653" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df_series.to_sql(<span class="st">&quot;wdi_series&quot;</span>, cnx, if_exists<span class="op">=</span><span class="st">&quot;replace&quot;</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>1509</code></pre>
@@ -3234,7 +3235,7 @@ Index: []</code></pre>
 </section>
 <section id="storing-wdi-data" class="level3">
 <h3 class="anchored" data-anchor-id="storing-wdi-data">Storing WDI Data</h3>
-<div id="11dc76df" class="cell" data-execution_count="8">
+<div id="eea98945" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df_data.to_sql(<span class="st">&quot;wdi_data&quot;</span>, cnx, if_exists<span class="op">=</span><span class="st">&quot;replace&quot;</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>401394</code></pre>
@@ -3246,7 +3247,7 @@ Index: []</code></pre>
 <h2 class="anchored" data-anchor-id="grant-permissions-for-other-to-access">Grant permissions for other to access</h2>
 <section id="build-a-list-of-users-and-tables" class="level3">
 <h3 class="anchored" data-anchor-id="build-a-list-of-users-and-tables">Build a list of users and tables</h3>
-<div id="6560a6d0" class="cell" data-execution_count="9">
+<div id="b131d5ad" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> cnx.<span class="ex">connect</span>().execute(text(<span class="ss">f&quot;&quot;&quot;</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ss">with users_cti as (</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ss">select user,host from mysql.user where user like &#39;sp25_%&#39; and not user like &#39;%_group%&#39;</span></span>
@@ -3271,7 +3272,7 @@ Index: []</code></pre>
 </section>
 <section id="run-grant-commands" class="level3">
 <h3 class="anchored" data-anchor-id="run-grant-commands">Run grant commands</h3>
-<div id="46aa3be3" class="cell" data-execution_count="10">
+<div id="0828d28e" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#! echo: false</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
