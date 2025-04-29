@@ -92,7 +92,7 @@ List all non-countries.
 
 run_sql_and_return_html(cnx,"""
 select
-*
+`short name`
   from
     world_bank.wdi_country
 WHERE
@@ -257,7 +257,7 @@ WHERE
 run_sql_and_return_html(cnx,"""
 select count(`Income Group`) as "Number of Income Groups", `Income Group` as "Income Group Values" 
 from
-world_bank.wdi_country_only
+world_bank.wdi_country
 GROUP BY `Income Group`
 ORDER BY "Number of Income Group" DESC
 """)
@@ -276,7 +276,7 @@ ORDER BY "Number of Income Group" DESC
 run_sql_and_return_html(cnx,"""
 select `short name` as "Broken Entry" 
 from
-world_bank.wdi_country_only
+world_bank.wdi_country
 WHERE
 `Income Group` IS NULL
 """)
